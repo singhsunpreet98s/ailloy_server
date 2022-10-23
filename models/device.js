@@ -8,12 +8,6 @@ const userSchema = new mongoose.Schema({
       max: 40,
       required: false
    },
-   deviceUniqueId: {
-      type: String,
-      mix: 3,
-      max: 20,
-      required: false
-   },
    imei: {
       type: String,
       mix: 3,
