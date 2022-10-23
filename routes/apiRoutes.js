@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const { body, validationResult } = require('express-validator');
 const { signup, login } = require('../controller/api/userController');
-const { addDevice } = require('../controller/api/deviceController');
-const { superAdminAuthentication } = require('../controller/middleware/authentication');
+const { addDevice, updateDeviceLocation } = require('../controller/api/deviceController');
+const { superAdminAuthentication, authenticate } = require('../controller/middleware/authentication');
 router.post('/user/signup',
    body('email').isEmail(),
    body('password').isLength({ min: 5 }),
@@ -21,5 +21,9 @@ router.post('/device/addDevice',
    body('expirationDate').isISO8601().toDate(),
    body('imei').isIMEI(),
    superAdminAuthentication, addDevice)
-
+router.post('/device/updateLocation',
+   body('imei').isLength({ min: 5 }),
+   body('latitude').isDecimal(),
+   body('longitude').isDecimal(),
+   authenticate, updateDeviceLocation)
 module.exports = router;

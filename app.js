@@ -25,6 +25,6 @@ catch (e) {
    console.log(e);
 }
 app.listen(process.env.PORT, () => {
-   console.log('App is running on localhost:' + process.env.PORT);
+   console.log('App is running ');
 })
 module.exports = app;

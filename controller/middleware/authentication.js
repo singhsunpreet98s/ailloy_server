@@ -10,7 +10,7 @@ exports.superAdminAuthentication = async (req, res, next) => {
          if (decoded) {
             let user = await User.findOne({ _id: decoded._id });
             if (user.isSuperAdmin) {
-               req.user = user;
+               req.body.user = user;
                next()
             }
             else {
@@ -85,8 +85,8 @@ exports.authenticate = (req, res, next) => {
                return res.json({ msg: 'token expired' })
             }
             if (decoded) {
-               let User = User.findById(req.body._user_id);
-               req.body.user = User;
+               let user = User.findById(req.body._user_id);
+               req.body.user = user;
                next()
             }
          })
