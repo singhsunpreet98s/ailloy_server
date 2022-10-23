@@ -21,7 +21,7 @@ module.exports = {
             delete: false,
          },
          noPermission: {
-            view: true,
+            view: false,
             edit: false,
             delete: false,
          }
@@ -53,31 +53,36 @@ module.exports = {
             return permissionObject;
          }
          else {
-            for (var i = 0; i < userPermissions.length; i++) {
-               switch (userPermissions[i].name) {
-                  case "maps":
-                     permissionObject.maps.view = userPermissions[i].view;
-                     permissionObject.maps.edit = userPermissions[i].edit;
-                     permissionObject.maps.delete = userPermissions[i].delete;
-                     break;
-                  case "dashboard":
-                     permissionObject.dashboard.view = userPermissions[i].view;
-                     permissionObject.dashboard.edit = userPermissions[i].edit;
-                     permissionObject.dashboard.delete = userPermissions[i].delete;
-                     break;
-                  case "trips":
-                     permissionObject.trips.view = userPermissions[i].view;
-                     permissionObject.trips.edit = userPermissions[i].edit;
-                     permissionObject.trips.delete = userPermissions[i].delete;
-                     break;
-                  default:
-                     break;
-               }
-            };
+            if (userPermissions.length > 0) {
+               for (var i = 0; i < userPermissions.length; i++) {
+                  switch (userPermissions[i].name) {
+                     case "maps":
+                        permissionObject.maps.view = userPermissions[i].view;
+                        permissionObject.maps.edit = userPermissions[i].edit;
+                        permissionObject.maps.delete = userPermissions[i].delete;
+                        break;
+                     case "dashboard":
+                        permissionObject.dashboard.view = userPermissions[i].view;
+                        permissionObject.dashboard.edit = userPermissions[i].edit;
+                        permissionObject.dashboard.delete = userPermissions[i].delete;
+                        break;
+                     case "trips":
+                        permissionObject.trips.view = userPermissions[i].view;
+                        permissionObject.trips.edit = userPermissions[i].edit;
+                        permissionObject.trips.delete = userPermissions[i].delete;
+                        break;
+                     default:
+                        break;
+                  }
+               };
+            }
+            else {
+               permissionObject.noPermission.view = true;
+            }
          }
       }
       catch (err) {
-
+         permissionObject.noPermission.view = true;
       }
       return permissionObject;
    },
