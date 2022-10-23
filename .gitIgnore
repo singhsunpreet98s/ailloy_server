@@ -61,7 +61,8 @@ typings/
 
 # next.js build output
 .next
-
+# sqlLiteDatabaes
+..db
 # nuxt.js build output
 .nuxt
 
