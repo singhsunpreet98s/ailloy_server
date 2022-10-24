@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotEnv = require('dotenv');
 const location = require('./helpers/getLocation')
+const Device = require('./models/device')
 const app = express();
 
 try {
@@ -18,7 +19,9 @@ try {
    app.use('/', require('./routes/frontendRoutes'));
    app.use('/api', require('./routes/apiRoutes'));
    app.get('/test', async function (req, res) {
-      res.status(201).json(await location.getlocation(34.396643, 76.888450));
+      const device = await Device.find({});
+
+      res.status(201).json(device);
    })
 }
 catch (e) {

@@ -44,13 +44,16 @@ exports.updateDeviceLocation = async (req, res, next) => {
    }
    try {
       const user = req.body.user;
-      const { imei, latitude, longitude } = req.body;
+      const { imei, latitude, longitude, speed, altitude } = req.body;
       let device = await Device.findOne({ iemi: imei })
       if (device === null) {
          return res.status(401).json({ status: 0 })
       }
       device.lastValidLatitude = latitude;
       device.lastValidLongitude = longitude;
+      device.speed = speed;
+      device.altitude = altitude;
+      device.previousLocations = `${latitude},${longitude}`;
       device.save();
       return res.status(201).json({ status: 1 })
    }

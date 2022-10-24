@@ -58,7 +58,7 @@ userSchema.virtual('isManager').get(function () {
 })
 userSchema.virtual('devices').get(async function () {
    if (this.role === 'super_admin' || this.role === 'admin') {
-      return await device.find({ isDeleted: false }).select('name imei expirationDate engine speed active');
+      return await device.find({ isDeleted: false }).select("-isDeleted  -createdAt -updatedAt -__v -addedBy");
    }
    return [];
 })
