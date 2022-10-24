@@ -40,7 +40,9 @@ exports.getDevicesOfUser = (req, res, next) => {
 exports.updateDeviceLocation = async (req, res, next) => {
    const errors = validationResult(req);
    if (!errors.isEmpty()) {
+      console.log(error.array())
       return res.status(501).json({ errors: errors.array() });
+      // console.log(error.array())
    }
    try {
       const user = req.body.user;
