@@ -25,7 +25,7 @@ router.post('/device/updateLocation',
    body('imei').isLength({ min: 5 }),
    body('latitude').isDecimal(),
    body('longitude').isDecimal(),
-   body('altitude').isDecimal(),
-   body('speed').isDecimal(),
+   body('altitude').exists(),
+   body('speed').exists(),
    authenticate, updateDeviceLocation)
 module.exports = router;
