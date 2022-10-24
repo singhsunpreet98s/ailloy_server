@@ -17,7 +17,11 @@ try {
    app.set('view engine', 'pug');
    app.use(bodyParser.json());
    app.use(bodyParser.urlencoded({ extended: true }));
-   app.use(cors())
+   app.use(function (req, res, next) {
+      res.header("Access-Control-Allow-Origin", "*");
+      res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+      next();
+   });
    app.use('/', require('./routes/frontendRoutes'));
    app.use('/api', require('./routes/apiRoutes'));
    app.get('/test', async function (req, res) {
