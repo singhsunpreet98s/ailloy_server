@@ -3,6 +3,7 @@ var bodyParser = require('body-parser');
 const mongoose = require('mongoose');
 const dotEnv = require('dotenv');
 const location = require('./helpers/getLocation')
+const cors = require('cors')
 const Device = require('./models/device')
 const app = express();
 
@@ -16,6 +17,7 @@ try {
    app.set('view engine', 'pug');
    app.use(bodyParser.json());
    app.use(bodyParser.urlencoded({ extended: true }));
+   app.use(cors())
    app.use('/', require('./routes/frontendRoutes'));
    app.use('/api', require('./routes/apiRoutes'));
    app.get('/test', async function (req, res) {
